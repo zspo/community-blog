@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+web:
+  domain: http://localhost
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Myblog@1
+    url: jdbc:mysql://localhost:3306/community?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
+    type: com.zaxxer.hikari.HikariDataSource
+
+logging:
+  level:
+    root: info
+    com.douyuehan.doubao: info
+
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+qiniu:
+  accesskey: "hki6MPfbm8AuKk1L4Yuqfo4iT8dct3cewk4ASK9C"
+  serectkey: "F2p7Li_v5C1MiyC3FBkrFYDwgXqaChI5QrHS8ygi"
+  bucket: "myblog-zsp"
+  cdn:
+    url: "img.aisharespace.com/"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.songpo.community.mapper.BmsTagMapper">
+    <select id="selectTopicIdsByTagId" resultType="com.songpo.community.model.vo.PostVO">
+        SELECT
+        t.id,t.title,t.cover,t.user_id,t.comments,t.`like`,t.share,t.collects,t.view,
+        t.top,t.essence,t.create_time,t.modify_time,
+        u.username,u.alias,u.avatar,
+        ca.category_name,ca.subcategory_name
+        FROM bms_post t
+        LEFT JOIN ums_user u
+        ON t.user_id = u.id
+        LEFT JOIN bms_category ca
+        ON t.category_id = ca.category_id and t.subcategory_id = ca.subcategory_id
+        LEFT JOIN bms_post_tag g
+        ON t.id = g.topic_id
+        WHERE g.tag_id = #{id}
+    </select>
+</mapper>

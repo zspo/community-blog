@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.songpo.community.mapper.BmsCommentMapper">
+    <resultMap id="topicVO" type="com.songpo.community.model.entity.BmsComment">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="user_id" property="userId"/>
+        <result column="topic_id" property="topicId"/>
+        <result column="like" property="like"/>
+        <result column="reply_id" property="replyId"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="getCommentsByTopicID" resultMap="topicVO">
+        SELECT *
+        FROM bms_comment t
+        WHERE t.topic_id = #{topic_id} and t.parent_id is null
+        ORDER BY t.create_time DESC
+    </select>
+    
+    <select id="getReplyByCommentID" resultMap="topicVO">
+        SELECT *
+        FROM bms_comment t
+        WHERE t.parent_id = #{parent_id}
+        ORDER BY create_time DESC
+    </select>
+</mapper>

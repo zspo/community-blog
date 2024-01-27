@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.songpo.community.mapper.BmsTopicTagMapper">
+    <select id="getTopicIdsByTagId" resultType="java.lang.String">
+        SELECT t.topic_id
+        from bms_post_tag t
+        where t.tag_id = #{id}
+    </select>
+
+    <select id="getAllTags" resultType="com.songpo.community.model.vo.TagVO">
+        SELECT t.tag_id tagId, bt.name tagName, count(*) tagCount
+        from bms_post_tag t
+        LEFT JOIN bms_tag bt
+        ON t.tag_id = bt.id
+		GROUP BY t.tag_id
+    </select>
+</mapper>
